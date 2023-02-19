@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Counter</title>
+</head>
+<body>
+  <h1>Counter: <span id="counter">0</span></h1>
+  <button id="button">Click me!</button>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    // Listen for counter updates from the server
+    socket.on('counterUpdate', (count) => {
+      document.getElementById('counter').textContent = count;
+    });
+
+    // Listen for button clicks and send them to the server
+    document.getElementById('button').addEventListener('click', () => {
+      socket.emit('buttonClick');
+    });
+  </script>
+</body>
+</html>
